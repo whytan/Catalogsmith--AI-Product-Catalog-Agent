@@ -27,10 +27,16 @@ async def ablation_session():
 async def test_ablation_memory_on_beats_off(ablation_session):
     """Causal proof: ON arm should need fewer rubric-gated redrafts on average."""
     subset = ABLATION_PRODUCTS[:4]
-    report = await run_ablation(ablation_session, products=subset)
+    report = await run_ablation(ablation_session, products=subset, mode="mock")
+    assert report.mode == "mock"
+    assert report.claim == "plumbing_regression_only"
     assert report.memory_off.mean_edit_rate > report.memory_on.mean_edit_rate
     assert report.memory_reduced_edits is True
     assert report.delta_mean_edit_rate > 0
+    assert report.n_products == 4
+    assert report.products_improved >= 1
+    payload = report.to_dict()
+    assert payload["mode"] == "mock"
 
 
 @pytest.mark.asyncio

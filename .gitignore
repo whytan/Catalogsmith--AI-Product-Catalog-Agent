@@ -13,3 +13,5 @@ build/
 *.log
 .DS_Store
 chroma_data/
+data/chroma_local/
+data/chroma_ablation/

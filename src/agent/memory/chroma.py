@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import math
 import struct
+from pathlib import Path
 from typing import cast
 
 import chromadb
@@ -64,7 +65,8 @@ def get_client() -> ClientAPI:
             )
             _client.heartbeat()
         except Exception:
-            _client = chromadb.PersistentClient(path="data/chroma_local")
+            Path(settings.chroma_path).mkdir(parents=True, exist_ok=True)
+            _client = chromadb.PersistentClient(path=settings.chroma_path)
 
     return cast(ClientAPI, _client)
 
@@ -79,19 +81,28 @@ def get_collection(name: str) -> Collection:
 
 
 def reset_client() -> None:
-    """Test helper — wipe collections and drop cached client.
+    """Drop cached client and wipe collections when safe.
 
-    Chroma's EphemeralClient shares an in-process backend across instances,
-    so setting _client = None alone does not isolate tests.
+    For PersistentClient, prefer a fresh ``settings.chroma_path`` directory
+    instead of delete_collection (which can corrupt HNSW segments on disk).
     """
     global _client
     client = _client
     if client is None and settings.chroma_ephemeral:
         client = chromadb.EphemeralClient()
-    if client is not None:
+    if client is not None and settings.chroma_ephemeral:
         for name in (VOICE_COLLECTION, FEEDBACK_COLLECTION):
             try:
                 client.delete_collection(name)
             except Exception:
                 pass
+    _client = None
+
+
+def use_fresh_persistent_path(path: str) -> None:
+    """Point the next get_client() at a clean on-disk Chroma directory."""
+    global _client
+    settings.chroma_ephemeral = False
+    settings.chroma_path = path
+    Path(path).mkdir(parents=True, exist_ok=True)
     _client = None

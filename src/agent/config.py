@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     chroma_host: str = "localhost"
     chroma_port: int = 8001
     chroma_ephemeral: bool = False
+    chroma_path: str = "data/chroma_local"
 
     @field_validator("chroma_ephemeral", mode="before")
     @classmethod

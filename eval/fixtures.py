@@ -1,4 +1,8 @@
-"""Frozen product fixtures for the learning ablation (unique names per run)."""
+"""Frozen product fixtures for the learning ablation (unique names per run).
+
+Order matters: first product in each category intentionally seeds rubric
+violation-comments so later same-category products can learn from memory.
+"""
 
 from __future__ import annotations
 
@@ -6,8 +10,9 @@ from decimal import Decimal
 
 from agent.pipeline.nodes.validate import ValidatedProduct
 
-# Diverse categories — same set used for both ON and OFF arms.
+# N≈10 — 4 electronics / 3 kitchen / 3 beauty. Seeders first per category.
 ABLATION_PRODUCTS: list[ValidatedProduct] = [
+    # Category seeders (trip rubric on first probe pass)
     ValidatedProduct(
         name="Ablation Probe Earbuds A1",
         price=Decimal("1999.00"),
@@ -30,6 +35,7 @@ ABLATION_PRODUCTS: list[ValidatedProduct] = [
         ingredients=["hyaluronic acid", "niacinamide"],
         materials=["glass bottle"],
     ),
+    # Second wave — ON arm should learn from seeders
     ValidatedProduct(
         name="Ablation Probe Speaker P4",
         price=Decimal("4599.00"),
@@ -51,5 +57,35 @@ ABLATION_PRODUCTS: list[ValidatedProduct] = [
         features=["75ml tube", "sensitive-skin safe", "weekly use"],
         ingredients=["kaolin clay", "aloe vera"],
         materials=["aluminium tube"],
+    ),
+    # Third wave — more same-category priors for memory
+    ValidatedProduct(
+        name="Ablation Probe Charger C7",
+        price=Decimal("1299.00"),
+        category="electronics",
+        features=["65W GaN", "USB-C PD", "foldable pins"],
+        materials=["polycarbonate"],
+    ),
+    ValidatedProduct(
+        name="Ablation Probe Mug Set G8",
+        price=Decimal("1599.00"),
+        category="kitchen",
+        features=["set of 2", "16oz each", "double-wall"],
+        materials=["ceramic"],
+    ),
+    ValidatedProduct(
+        name="Ablation Probe Scrub R9",
+        price=Decimal("649.00"),
+        category="beauty",
+        features=["200g jar", "sugar exfoliant", "cruelty-free"],
+        ingredients=["cane sugar", "sweet orange oil"],
+        materials=["glass jar"],
+    ),
+    ValidatedProduct(
+        name="Ablation Probe Band W10",
+        price=Decimal("1899.00"),
+        category="electronics",
+        features=["heart-rate sensor", "7-day battery", "sleep tracking"],
+        materials=["silicone strap"],
     ),
 ]

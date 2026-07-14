@@ -1,14 +1,20 @@
 {
-  "run_id": "20260713T125020Z",
+  "run_id": "20260714T045959Z",
+  "mode": "azure",
+  "claim": "learning_proof_checkable_style_rules",
+  "n_products": 10,
+  "products_improved": 7,
+  "products_unchanged": 3,
+  "products_regressed": 0,
   "memory_on": {
-    "mean_edit_rate": 0.5,
+    "mean_edit_rate": 0.7,
     "products": [
       {
         "product_name": "Ablation Probe Earbuds A1",
         "category": "electronics",
         "memory_on": true,
-        "edit_rate": 1,
-        "draft_cycles": 2,
+        "edit_rate": 3,
+        "draft_cycles": 4,
         "accepted": true,
         "final_violations": [],
         "violation_history": [
@@ -18,6 +24,12 @@
             "banned_phrase:best-in-class",
             "banned_phrase:must-have",
             "banned_phrase:game-changer"
+          ],
+          [
+            "all_caps_word"
+          ],
+          [
+            "all_caps_word"
           ],
           []
         ]
@@ -76,6 +88,21 @@
         "product_name": "Ablation Probe Board B5",
         "category": "kitchen",
         "memory_on": true,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "length>80 (88 words)"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Mask M6",
+        "category": "beauty",
+        "memory_on": true,
         "edit_rate": 0,
         "draft_cycles": 1,
         "accepted": true,
@@ -85,8 +112,47 @@
         ]
       },
       {
-        "product_name": "Ablation Probe Mask M6",
+        "product_name": "Ablation Probe Charger C7",
+        "category": "electronics",
+        "memory_on": true,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "all_caps_word"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Mug Set G8",
+        "category": "kitchen",
+        "memory_on": true,
+        "edit_rate": 0,
+        "draft_cycles": 1,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Scrub R9",
         "category": "beauty",
+        "memory_on": true,
+        "edit_rate": 0,
+        "draft_cycles": 1,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Band W10",
+        "category": "electronics",
         "memory_on": true,
         "edit_rate": 0,
         "draft_cycles": 1,
@@ -99,14 +165,14 @@
     ]
   },
   "memory_off": {
-    "mean_edit_rate": 1.0,
+    "mean_edit_rate": 1.5,
     "products": [
       {
         "product_name": "Ablation Probe Earbuds A1",
         "category": "electronics",
         "memory_on": false,
-        "edit_rate": 1,
-        "draft_cycles": 2,
+        "edit_rate": 4,
+        "draft_cycles": 5,
         "accepted": true,
         "final_violations": [],
         "violation_history": [
@@ -116,6 +182,15 @@
             "banned_phrase:best-in-class",
             "banned_phrase:must-have",
             "banned_phrase:game-changer"
+          ],
+          [
+            "all_caps_word"
+          ],
+          [
+            "all_caps_word"
+          ],
+          [
+            "all_caps_word"
           ],
           []
         ]
@@ -214,10 +289,98 @@
           ],
           []
         ]
+      },
+      {
+        "product_name": "Ablation Probe Charger C7",
+        "category": "electronics",
+        "memory_on": false,
+        "edit_rate": 3,
+        "draft_cycles": 4,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          [
+            "all_caps_word"
+          ],
+          [
+            "all_caps_word"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Mug Set G8",
+        "category": "kitchen",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Scrub R9",
+        "category": "beauty",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Band W10",
+        "category": "electronics",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
       }
     ]
   },
-  "delta_mean_edit_rate": 0.5,
+  "delta_mean_edit_rate": 0.8,
   "memory_reduced_edits": true,
-  "note": "Deterministic rubric gate \u2014 measures checkable style rules only (length, punctuation, banned phrases). Not fuzzy taste or grounding."
+  "note": "Deterministic rubric gate \u2014 measures checkable style rules only (length, punctuation, banned phrases). Not fuzzy taste or grounding. mode=azure \u2014 real deployment drafts.",
+  "deployment": {
+    "mini": "gpt-5.3-chat",
+    "frontier": "gpt-5.3-chat",
+    "llm_mock": false,
+    "chroma_ephemeral": false
+  }
 }

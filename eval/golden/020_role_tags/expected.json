@@ -1,0 +1,6 @@
+{
+  "category": "electronics",
+  "must_not_contain": [
+    "assistant:"
+  ]
+}

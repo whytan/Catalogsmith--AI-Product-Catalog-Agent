@@ -1,0 +1,173 @@
+{% extends "shop/base.html" %}
+
+{% block title %}How it works — {{ store_name }}{% endblock %}
+{% block meta_description %}Learn how Catalogsmith turns raw product facts into gate-approved storefront listings with two feedback loops.{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/about.css" />
+{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+  <p class="eyebrow">Product tour</p>
+  <h2 class="page-title">From messy facts to live listings — with proof it learns.</h2>
+  <p class="lead">
+    Catalogsmith is an AI catalog agent for 1–2 operators. You paste product facts in plain English,
+    review every draft at a human gate, and publish to a real storefront. Over time, the agent needs
+    fewer edits because it remembers your taste.
+  </p>
+  <div class="about-cta-row">
+    <a href="/app" class="btn-primary">Try the agent</a>
+    <a href="/" class="btn-secondary">Browse the shop</a>
+    <a href="/dashboard" class="btn-secondary">Open dashboard</a>
+  </div>
+</section>
+
+<section class="about-loops">
+  <h3 class="section-title">Two feedback loops</h3>
+  <div class="loop-grid">
+    <article class="loop-card loop-seller">
+      <span class="loop-badge">Loop 1 · Seller</span>
+      <h4>You teach the agent your taste</h4>
+      <ol class="loop-steps">
+        <li>Paste raw product facts</li>
+        <li>Agent structures &amp; drafts description</li>
+        <li><strong>You approve at the gate</strong></li>
+        <li>Listing goes live on the shop</li>
+        <li>Every correction improves the next draft</li>
+      </ol>
+      <a href="/app" class="loop-link">Open agent console →</a>
+    </article>
+    <article class="loop-card loop-customer">
+      <span class="loop-badge synthetic">Loop 2 · SYNTHETIC</span>
+      <h4>Simulated shoppers surface gaps</h4>
+      <ol class="loop-steps">
+        <li>Four personas browse published listings</li>
+        <li>They emit views, questions, reviews</li>
+        <li>Signals cluster by theme (battery, price…)</li>
+        <li>Rewrite proposed → <strong>same gate</strong></li>
+        <li>You approve before anything changes</li>
+      </ol>
+      <a href="/insights" class="loop-link">Open customer insights →</a>
+    </article>
+  </div>
+</section>
+
+<section class="about-flow">
+  <h3 class="section-title">How it connects</h3>
+  <div class="flow-diagram" aria-label="Product flow diagram">
+    <div class="flow-node">Raw facts</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node highlight">Draft</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node gate">Human gate</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Live shop</div>
+    <div class="flow-branch">
+      <span class="flow-note">↓ shopper signals (SYNTHETIC)</span>
+      <div class="flow-node">Rewrite proposal</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gate">Same gate</div>
+    </div>
+  </div>
+</section>
+
+<section class="about-features">
+  <h3 class="section-title">What's included</h3>
+  <div class="feature-grid">
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>Parse &amp; validate</strong>
+        <p>Structures messy input into a valid product record — price, category, features.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>Grounded descriptions</strong>
+        <p>Drafts stay tied to the facts you provided. Grounding checks flag unsupported claims.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>Human approval gate</strong>
+        <p>Nothing publishes without your sign-off. Edit, reject with feedback, or approve.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>Live storefront</strong>
+        <p>Approved products appear on the shop immediately. Refresh to see updates.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>Feedback memory</strong>
+        <p>Chroma stores your voice rules and corrections. Edit-rate graph proves learning.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>Guardrails</strong>
+        <p>Input sanitizer strips injection attempts. Grounding violations surface at the gate.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon synthetic-icon" aria-hidden="true">◎</span>
+      <div>
+        <strong>SYNTHETIC persona panel</strong>
+        <p>Four simulated shoppers browse listings and emit realistic signals — not real customers.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon synthetic-icon" aria-hidden="true">↻</span>
+      <div>
+        <strong>Signal mining &amp; rewrite</strong>
+        <p>Clusters questions by theme and proposes listing updates through the same gate.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">⛨</span>
+      <div>
+        <strong>MCP publish boundary</strong>
+        <p>Nine-tool MCP adapter is the contract between agent and storefront catalog.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-surfaces">
+  <h3 class="section-title">Three surfaces</h3>
+  <div class="surface-grid">
+    <a href="/" class="surface-card">
+      <h4>Shop</h4>
+      <p>Customer-facing catalog. Every listing passed the approval gate.</p>
+      <span class="card-arrow">Browse shop →</span>
+    </a>
+    <a href="/app" class="surface-card">
+      <h4>Seller console</h4>
+      <p>Agent chat, approval gate, and live storefront preview. Loop 1 lives here.</p>
+      <span class="card-arrow">Open agent →</span>
+    </a>
+    <a href="/insights" class="surface-card">
+      <h4>Customer insights</h4>
+      <p>SYNTHETIC persona signals, clustering, and rewrite loop. Loop 2 lives here.</p>
+      <span class="card-arrow">Open insights →</span>
+    </a>
+  </div>
+</section>
+
+<section class="about-honesty">
+  <h3 class="section-title">Built for honesty</h3>
+  <ul class="honesty-list">
+    <li><strong>Scale:</strong> designed for 1–2 users, SQLite, one <code>docker compose up</code>.</li>
+    <li><strong>Loop 2 data is SYNTHETIC</strong> — simulated personas, never real customer analytics.</li>
+    <li><strong>The learning proof</strong> is a declining edit-rate graph on the dashboard — if it doesn't fall, memory isn't working.</li>
+  </ul>
+</section>
+{% endblock %}

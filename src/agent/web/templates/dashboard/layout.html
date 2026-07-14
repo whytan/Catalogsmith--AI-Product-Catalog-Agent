@@ -1,0 +1,39 @@
+{% extends "seller/base.html" %}
+
+{% block body_class %}surface-seller page-workspace page-dashboard{% endblock %}
+{% block container_class %}container container-dashboard{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/dashboard.css" />
+<link rel="stylesheet" href="/static/onboarding.css" />
+{% endblock %}
+
+{% block body_attrs %}data-onboarding="dashboard"{% endblock %}
+
+{% block content %}
+<div class="workspace-layout" data-workspace>
+  <button type="button" class="workspace-toggle" aria-expanded="false" aria-controls="workspace-sidebar">
+    <span class="workspace-toggle-label">☰ Operations menu</span>
+  </button>
+
+  <aside class="workspace-sidebar" id="workspace-sidebar" aria-label="Operations navigation">
+    <div class="sidebar-brand">
+      <span class="sidebar-label">Loop 1 · Seller</span>
+      <strong>Operations</strong>
+    </div>
+    {% include "dashboard/_nav.html" %}
+    <div class="sidebar-footer">
+      <a href="/app" class="sidebar-cta">Open agent console</a>
+      <a href="/insights" class="sidebar-link">Customer insights →</a>
+    </div>
+  </aside>
+
+  <div class="workspace-main">
+    {% block workspace_header %}{% endblock %}
+    <div class="workspace-content">
+      {% block workspace_content %}{% endblock %}
+    </div>
+  </div>
+</div>
+<script src="/static/onboarding.js"></script>
+{% endblock %}

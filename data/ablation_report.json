@@ -1,0 +1,223 @@
+{
+  "run_id": "20260713T125020Z",
+  "memory_on": {
+    "mean_edit_rate": 0.5,
+    "products": [
+      {
+        "product_name": "Ablation Probe Earbuds A1",
+        "category": "electronics",
+        "memory_on": true,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Kettle K2",
+        "category": "kitchen",
+        "memory_on": true,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Serum S3",
+        "category": "beauty",
+        "memory_on": true,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Speaker P4",
+        "category": "electronics",
+        "memory_on": true,
+        "edit_rate": 0,
+        "draft_cycles": 1,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Board B5",
+        "category": "kitchen",
+        "memory_on": true,
+        "edit_rate": 0,
+        "draft_cycles": 1,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Mask M6",
+        "category": "beauty",
+        "memory_on": true,
+        "edit_rate": 0,
+        "draft_cycles": 1,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          []
+        ]
+      }
+    ]
+  },
+  "memory_off": {
+    "mean_edit_rate": 1.0,
+    "products": [
+      {
+        "product_name": "Ablation Probe Earbuds A1",
+        "category": "electronics",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Kettle K2",
+        "category": "kitchen",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Serum S3",
+        "category": "beauty",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Speaker P4",
+        "category": "electronics",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Board B5",
+        "category": "kitchen",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      },
+      {
+        "product_name": "Ablation Probe Mask M6",
+        "category": "beauty",
+        "memory_on": false,
+        "edit_rate": 1,
+        "draft_cycles": 2,
+        "accepted": true,
+        "final_violations": [],
+        "violation_history": [
+          [
+            "exclamation_mark",
+            "all_caps_word",
+            "banned_phrase:best-in-class",
+            "banned_phrase:must-have",
+            "banned_phrase:game-changer"
+          ],
+          []
+        ]
+      }
+    ]
+  },
+  "delta_mean_edit_rate": 0.5,
+  "memory_reduced_edits": true,
+  "note": "Deterministic rubric gate \u2014 measures checkable style rules only (length, punctuation, banned phrases). Not fuzzy taste or grounding."
+}

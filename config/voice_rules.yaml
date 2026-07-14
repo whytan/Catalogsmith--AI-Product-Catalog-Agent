@@ -1,0 +1,43 @@
+store_name: Catalogsmith Demo Shop
+
+rules:
+  - id: tone-casual
+    text: "Use a warm, confident tone — like a knowledgeable shop assistant, not a press release."
+  - id: lead-benefit
+    text: "Lead with the main customer benefit, not the product name or spec sheet."
+  - id: length-cap
+    text: "Keep descriptions under 80 words — roughly 2–3 sentences."
+  - id: second-person
+    text: "Use second person ('you') when describing benefits."
+  - id: plain-language
+    text: "Use plain language. Avoid jargon and hype words like 'revolutionary' or 'game-changing'."
+  - id: no-exclamation
+    text: "No exclamation marks."
+  - id: no-all-caps
+    text: "No ALL CAPS words."
+  - id: features-natural
+    text: "Mention 1–2 standout features naturally in prose — not as a bullet list."
+  - id: no-name-open
+    text: "Do not open the description with the product name."
+  - id: no-category-repeat
+    text: "Do not repeat the category word ('this electronics product')."
+  - id: facts-only
+    text: "Only make claims supported by the provided product facts."
+  - id: no-medical-claims
+    text: "Do not make medical or guaranteed-outcome claims unless explicitly in the facts."
+  - id: price-optional
+    text: "Do not mention price in the description unless the seller asks."
+  - id: ingredients-careful
+    text: "For beauty/food products, mention ingredients only when they are a selling point in the facts."
+  - id: material-honest
+    text: "Name materials only when listed in facts — do not infer premium materials."
+  - id: competitor-silent
+    text: "Never mention competitor brands."
+  - id: seo-light
+    text: "Write for humans first — no keyword stuffing."
+  - id: one-paragraph
+    text: "Single paragraph only — no headers or markdown in the description."
+  - id: indian-english
+    text: "Use Indian English spelling conventions where natural (colour, metre)."
+  - id: currency-silent
+    text: "Never include currency symbols in the description text."

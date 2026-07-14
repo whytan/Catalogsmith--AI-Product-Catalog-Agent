@@ -1,0 +1,68 @@
+{% extends "shop/base.html" %}
+{% from "storefront/_product_image.html" import product_image %}
+
+{% block title %}{{ product.name }} — {{ store_name }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Shop</a>
+  <span aria-hidden="true">/</span>
+  <span>{{ product.name }}</span>
+</nav>
+
+<article class="product-detail">
+  {{ product_image(product, detail=true) }}
+  <div class="product-detail-body">
+    <p class="product-category">{{ category_labels.get(product.category, product.category) }}</p>
+    <h2>{{ product.name }}</h2>
+    <p class="product-price large">{{ product.price | inr }}</p>
+
+    <div class="trust-badges">
+      <span class="trust-badge">Gate approved</span>
+      <span class="trust-badge">Fact-grounded</span>
+    </div>
+
+    <p class="product-description">{{ product.description }}</p>
+
+    <div class="product-actions">
+      <a href="/app" class="btn-primary">Edit via agent</a>
+      <a href="/" class="btn-secondary">Back to shop</a>
+    </div>
+
+    <div class="specs-grid">
+      {% if product.facts.features %}
+      <section class="fact-block">
+        <h3>Features</h3>
+        <ul>
+          {% for feature in product.facts.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if product.facts.ingredients %}
+      <section class="fact-block">
+        <h3>Ingredients</h3>
+        <ul>
+          {% for item in product.facts.ingredients %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if product.facts.materials %}
+      <section class="fact-block">
+        <h3>Materials</h3>
+        <ul>
+          {% for item in product.facts.materials %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}

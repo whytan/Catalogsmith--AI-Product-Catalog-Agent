@@ -1,0 +1,7 @@
+{
+  "name": "Aurora Wireless Earbuds",
+  "price": "2499.00",
+  "category": "electronics",
+  "features_contains": ["ANC", "8-hour battery"],
+  "photo_filename": "aurora-earbuds.jpg"
+}

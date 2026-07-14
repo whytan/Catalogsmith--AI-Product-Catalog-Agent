@@ -1,0 +1,135 @@
+{% extends "dashboard/layout.html" %}
+{% from "_partials/page_header.html" import page_header %}
+{% set active = 'learning' %}
+
+{% block title %}Learning — {{ store_name }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block workspace_header %}
+{{ page_header(
+  'Loop 1 · Memory',
+  'Learning curve',
+  'The headline metric. Edit rate should fall as you publish products with consistent feedback — proof that memory is working.'
+) }}
+{% endblock %}
+
+{% block workspace_content %}
+<div class="metric-cards">
+  <div class="metric-card metric-highlight">
+    <span class="metric-label">Products tracked</span>
+    <strong>{{ data.summary.products }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Avg edit rate</span>
+    <strong>{{ data.summary.avg_edit_rate }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Avg edit distance</span>
+    <strong>{{ data.summary.avg_edit_distance }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">First → latest</span>
+    <strong>{{ data.summary.first_edit_rate }} → {{ data.summary.latest_edit_rate }}</strong>
+  </div>
+</div>
+
+<div class="chart-grid">
+  <div class="chart-card">
+    <h3>Edit rate per product</h3>
+    <canvas id="editRateChart" height="200"></canvas>
+  </div>
+  <div class="chart-card">
+    <h3>Edit distance per product</h3>
+    <canvas id="editDistanceChart" height="200"></canvas>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <h3>Product history</h3>
+  </div>
+  <div class="table-wrap">
+    <table class="learning-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product</th>
+          <th>Edit rate</th>
+          <th>Edit distance</th>
+          <th>Approved</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for point in data.points %}
+        <tr>
+          <td>{{ point.product_index }}</td>
+          <td>{{ point.product_name }}</td>
+          <td>{{ point.edit_rate }}</td>
+          <td>{{ point.edit_distance }}</td>
+          <td>{{ point.approved_at }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No approved products yet. Publish via the agent console to populate this chart.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const points = {{ data.points | tojson }};
+  const chartDefaults = {
+    borderWidth: 2,
+    pointRadius: 4,
+    pointHoverRadius: 6,
+    tension: 0.35,
+    fill: true,
+  };
+
+  if (points.length) {
+    const labels = points.map((p) => `#${p.product_index}`);
+
+    new Chart(document.getElementById("editRateChart"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Rounds before approval",
+          data: points.map((p) => p.edit_rate),
+          borderColor: "#c45d26",
+          backgroundColor: "rgba(196, 93, 38, 0.08)",
+          ...chartDefaults,
+        }],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+      },
+    });
+
+    new Chart(document.getElementById("editDistanceChart"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Chars changed",
+          data: points.map((p) => p.edit_distance),
+          borderColor: "#2d6a3e",
+          backgroundColor: "rgba(45, 106, 62, 0.08)",
+          ...chartDefaults,
+        }],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } },
+      },
+    });
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% if gate.type == 'needs_facts' %}
+<div class="gate-card facts-card" data-thread-id="{{ gate.thread_id }}">
+  <div class="guardrail-banner warn">
+    <h3>Missing required fields</h3>
+    <p>Your spec sheet was parsed, but we still need a few details before drafting.</p>
+    <ul>
+      {% for issue in gate.issues %}
+      <li>{{ issue.message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="facts-block">
+    <h3>Parsed so far</h3>
+    {% if gate.facts %}
+    <ul>
+      <li><strong>Name:</strong> {{ gate.facts.name or '—' }}</li>
+      <li><strong>Category:</strong> {{ gate.facts.category or '—' }}</li>
+      {% if gate.facts.features %}
+      <li><strong>Features:</strong> {{ gate.facts.features | join(', ') }}</li>
+      {% endif %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <label for="facts-name">Product name</label>
+  <input id="facts-name" type="text" value="{{ gate.facts.name if gate.facts else '' }}" />
+
+  <label for="facts-price">Selling price (INR) <span class="required">*</span></label>
+  <input id="facts-price" type="text" inputmode="decimal" placeholder="e.g. 134900 — not battery mAh or storage GB" required />
+
+  <label for="facts-category">Category <span class="required">*</span></label>
+  <select id="facts-category" required>
+    <option value="">Select…</option>
+    <option value="electronics" {% if gate.facts and gate.facts.category == 'electronics' %}selected{% endif %}>electronics</option>
+    <option value="kitchen" {% if gate.facts and gate.facts.category == 'kitchen' %}selected{% endif %}>kitchen</option>
+    <option value="beauty" {% if gate.facts and gate.facts.category == 'beauty' %}selected{% endif %}>beauty</option>
+  </select>
+
+  <label for="facts-photo">Product photo (optional)</label>
+  <input id="facts-photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" />
+  {% set facts_image = gate | product_image %}
+  {% if facts_image %}
+  <div class="gate-product-image compact">
+    <img src="{{ facts_image }}" alt="Current product photo" loading="lazy" />
+  </div>
+  {% endif %}
+
+  <div class="gate-actions">
+    <button class="btn-approve" data-action="complete_facts">Continue to draft</button>
+  </div>
+</div>
+{% elif gate.type == 'gate' %}
+<div class="gate-card" data-thread-id="{{ gate.thread_id }}">
+  <div class="gate-meta">
+    <span class="pill">Draft #{{ gate.draft_num }}</span>
+    <span class="pill muted">Revision {{ gate.revision_count }}</span>
+    {% if gate.rewrite_product_id %}
+    <span class="pill">Product #{{ gate.rewrite_product_id }}</span>
+    {% endif %}
+  </div>
+
+  {% if gate.rewrite_reason %}
+  <div class="guardrail-banner warn">
+    <h3>Loop 2 rewrite (SYNTHETIC)</h3>
+    <p>{{ gate.rewrite_reason }}</p>
+  </div>
+  {% endif %}
+
+  {% if gate.sanitization_warnings %}
+  <div class="guardrail-banner warn">
+    <h3>Input sanitization</h3>
+    <ul>
+      {% for warning in gate.sanitization_warnings %}
+      <li>{{ warning }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if gate.grounding_violations %}
+  <div class="guardrail-banner danger">
+    <h3>Grounding flags</h3>
+    <p>These claims are not supported by the product facts. Review before approving.</p>
+    <ul>
+      {% for item in gate.grounding_violations %}
+      <li><strong>{{ item.claim }}</strong> — {{ item.message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% set gate_image = gate | product_image %}
+  {% if gate_image %}
+  <div class="gate-product-image">
+    <img src="{{ gate_image }}" alt="Product image preview" loading="lazy" />
+  </div>
+  {% else %}
+  <div class="photo-upload-row gate-photo-upload">
+    <label for="gate-photo">Product photo (optional)</label>
+    <input id="gate-photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" />
+    <button type="button" class="btn-secondary btn-sm" data-action="attach_photo">Upload photo</button>
+  </div>
+  {% endif %}
+
+  <div class="facts-block">
+    <h3>Product facts</h3>
+    {% if gate.facts %}
+    <ul>
+      <li><strong>Name:</strong> {{ gate.facts.name }}</li>
+      <li><strong>Price:</strong> {{ gate.facts.price }}</li>
+      <li><strong>Category:</strong> {{ gate.facts.category }}</li>
+      {% if gate.facts.features %}
+      <li><strong>Features:</strong> {{ gate.facts.features | join(', ') }}</li>
+      {% endif %}
+      {% if gate.facts.photo_filename %}
+      <li><strong>Photo:</strong> {{ gate.facts.photo_filename }}</li>
+      {% endif %}
+    </ul>
+    {% else %}
+    <p class="empty-state">No structured facts available.</p>
+    {% endif %}
+  </div>
+
+  <label for="gate-description">Description (editable)</label>
+  <textarea id="gate-description" rows="6">{{ gate.description }}</textarea>
+
+  <label for="gate-comment">Feedback comment (optional)</label>
+  <input id="gate-comment" type="text" placeholder="e.g. shorter, highlight battery life" />
+
+  <div class="gate-actions">
+    <button class="btn-approve" data-action="approve">Approve & publish</button>
+    <button class="btn-reject" data-action="reject">Reject & redraft</button>
+    <button class="btn-edit" data-action="edit">Save edit & redraft</button>
+  </div>
+</div>
+{% elif gate.type == 'complete' %}
+<div class="gate-card complete">
+  <div class="complete-badge">Published</div>
+  <h3>{{ gate.status }}</h3>
+  {% if gate.product_id %}
+  <p>Product <a href="/products/{{ gate.product_id }}" target="_blank" rel="noopener">#{{ gate.product_id }}</a> is live.</p>
+  {% endif %}
+  <blockquote>{{ gate.description }}</blockquote>
+</div>
+{% else %}
+<p class="empty-state">No gate data.</p>
+{% endif %}

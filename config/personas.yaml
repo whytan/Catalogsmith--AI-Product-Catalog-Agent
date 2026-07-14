@@ -1,0 +1,46 @@
+personas:
+  - id: bargain_hunter
+    name: Bargain Hunter
+  - id: spec_reader
+    name: Spec Reader
+  - id: skeptical_gifter
+    name: Skeptical Gifter
+  - id: skimmer
+    name: Skimmer
+
+profiles:
+  bargain_hunter:
+    focus: price and value
+    question_templates:
+      - "Is Rs {price} the best price for this?"
+      - "Any discount if I buy two?"
+      - "What makes this worth the price?"
+    review_tone: skeptical about value
+    cart_threshold: 1500
+
+  spec_reader:
+    focus: technical specifications missing from listing
+    question_templates:
+      - "What is the exact battery life?"
+      - "What materials is this made from?"
+      - "Does it support fast charging?"
+      - "What are the dimensions?"
+    review_tone: detail-oriented
+    cart_threshold: 99999
+
+  skeptical_gifter:
+    focus: gift suitability and trust
+    question_templates:
+      - "Would this make a good gift?"
+      - "Is the quality good enough to give someone?"
+      - "What if the recipient does not like it?"
+    review_tone: cautious
+    cart_threshold: 3000
+
+  skimmer:
+    focus: quick first impression
+    question_templates:
+      - "What is this in one sentence?"
+      - "Is this popular?"
+    review_tone: brief
+    cart_threshold: 2000

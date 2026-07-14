@@ -1,0 +1,434 @@
+/* ── Shared UI components (all surfaces) ── */
+
+/* Surface backgrounds */
+.surface-shop { --surface-accent: var(--accent); }
+.surface-seller { --surface-accent: var(--accent); }
+.surface-insights { --surface-accent: var(--warning); }
+
+.page-workspace .site-footer { margin-top: 0; }
+
+/* ── Surface switcher (Seller / Insights zones) ── */
+.surface-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.surface-bar-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0.65rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.surface-switcher {
+  display: inline-flex;
+  gap: 0.35rem;
+  padding: 0.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+}
+
+.surface-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.surface-pill:hover {
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(255,255,255,0.6);
+}
+
+.surface-pill.active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.surface-insights .surface-pill.active {
+  color: var(--warning);
+}
+
+.surface-icon {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.surface-context {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ── Workspace shell (dashboard + insights) ── */
+.workspace-layout {
+  display: grid;
+  grid-template-columns: 252px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  min-height: calc(100vh - 200px);
+}
+
+.workspace-toggle {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+}
+
+.workspace-sidebar {
+  position: sticky;
+  top: 120px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-brand {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-brand .sidebar-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.sidebar-brand strong {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.workspace-nav,
+.dashboard-nav,
+.insights-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.workspace-nav .nav-item,
+.dashboard-nav .nav-item,
+.insights-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.workspace-nav .nav-item:hover,
+.dashboard-nav .nav-item:hover,
+.insights-nav .nav-item:hover {
+  background: var(--bg);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.workspace-nav .nav-item.active,
+.dashboard-nav .nav-item.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.surface-insights .workspace-nav .nav-item.active,
+.surface-insights .insights-nav .nav-item.active {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.workspace-nav .nav-icon,
+.dashboard-nav .nav-icon,
+.insights-nav .nav-icon {
+  width: 1.25rem;
+  text-align: center;
+  opacity: 0.65;
+  font-size: 0.9rem;
+}
+
+.workspace-nav .nav-item.active .nav-icon,
+.dashboard-nav .nav-item.active .nav-icon,
+.insights-nav .nav-item.active .nav-icon { opacity: 1; }
+
+.workspace-nav .nav-external,
+.dashboard-nav .nav-external,
+.insights-nav .nav-external {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-cta {
+  display: block;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.sidebar-cta:hover {
+  background: #2d2b28;
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.sidebar-link:hover { text-decoration: underline; }
+
+.workspace-main { min-width: 0; }
+
+.workspace-content,
+.dashboard-content,
+.insights-content {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* ── Page headers ── */
+.page-header,
+.dashboard-page-header,
+.insights-page-header {
+  margin-bottom: 1.25rem;
+}
+
+.page-header .page-banner,
+.page-header .synthetic-banner {
+  margin-bottom: 1rem;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.section-block {
+  display: grid;
+  gap: 1rem;
+}
+
+.section-block + .section-block {
+  margin-top: 0.5rem;
+}
+
+/* ── Agent toolbar ── */
+.agent-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.agent-toolbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.toolbar-pill {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-secondary);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.toolbar-pill:hover {
+  border-color: var(--accent-muted);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.toolbar-pill.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Collapsible help */
+.help-drawer {
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.help-drawer summary {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.help-drawer summary::-webkit-details-marker { display: none; }
+
+.help-drawer summary::after {
+  content: "+";
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.help-drawer[open] summary::after { content: "−"; }
+
+.help-drawer .help-body {
+  padding: 0 1rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.help-drawer ol {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Shop organized sections */
+.shop-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.shop-toolbar-sticky {
+  position: sticky;
+  top: 68px;
+  z-index: 20;
+  background: rgba(247, 245, 242, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem 0;
+  margin: 0 -0.25rem;
+  border-bottom: 1px solid transparent;
+}
+
+.shop-toolbar-sticky.is-stuck {
+  border-bottom-color: var(--border);
+}
+
+@media (max-width: 960px) {
+  .workspace-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .workspace-sidebar {
+    display: none;
+    position: static;
+  }
+
+  .workspace-layout.nav-open .workspace-sidebar {
+    display: block;
+  }
+
+  .workspace-nav,
+  .dashboard-nav,
+  .insights-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .workspace-nav .nav-external,
+  .dashboard-nav .nav-external,
+  .insights-nav .nav-external {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .surface-bar-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .surface-switcher {
+    width: 100%;
+    justify-content: center;
+  }
+}

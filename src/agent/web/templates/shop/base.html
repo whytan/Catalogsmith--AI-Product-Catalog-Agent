@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body_class %}surface-shop{% endblock %}
+{% block tagline %}Curated catalog · gate-approved listings{% endblock %}
+
+{% block header_nav %}
+<a href="/" class="{% if request.url.path == '/' %}nav-active{% endif %}">Shop</a>
+<a href="/about" class="{% if request.url.path == '/about' %}nav-active{% endif %}">How it works</a>
+<a href="/app" class="nav-login">Seller login</a>
+{% endblock %}
+
+{% block footer_links %}
+<div>
+  <h4>Shop</h4>
+  <a href="/">Browse products</a>
+  <a href="/about">How it works</a>
+</div>
+<div>
+  <h4>Sellers</h4>
+  <a href="/app">Agent console</a>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/insights">Insights</a>
+</div>
+<div>
+  <h4>Support</h4>
+  <a href="/health">System health</a>
+  <a href="/docs">API docs</a>
+</div>
+{% endblock %}

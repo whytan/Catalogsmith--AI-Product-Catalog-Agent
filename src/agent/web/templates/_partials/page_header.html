@@ -1,0 +1,11 @@
+{# Shared page header for workspace pages #}
+{% macro page_header(eyebrow, title, lead='', banner_html='') %}
+<header class="page-header">
+  {% if banner_html %}
+  <div class="page-banner">{{ banner_html }}</div>
+  {% endif %}
+  {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+  <h2 class="page-title">{{ title }}</h2>
+  {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
+</header>
+{% endmacro %}

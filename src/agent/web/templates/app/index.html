@@ -1,0 +1,130 @@
+{% extends "seller/base.html" %}
+
+{% block title %}Agent Console — {{ store_name }}{% endblock %}
+{% block body_class %}surface-seller page-workspace page-agent{% endblock %}
+{% block container_class %}container container-wide{% endblock %}
+{% block body_attrs %}data-onboarding="agent"{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/agent.css" />
+<link rel="stylesheet" href="/static/onboarding.css" />
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <header class="agent-header">
+    <div class="agent-header-text">
+      <p class="eyebrow">Loop 1 · Seller</p>
+      <h2 class="agent-title">Agent console</h2>
+      <p class="agent-subtitle">Structure raw facts, draft descriptions, approve at the gate, and publish to the live storefront.</p>
+    </div>
+  </header>
+
+  <div class="agent-toolbar">
+    <div class="agent-toolbar-links">
+      <a href="/app" class="toolbar-pill active">Agent console</a>
+      <a href="/dashboard" class="toolbar-pill">Operations</a>
+      <a href="/insights" class="toolbar-pill">Insights</a>
+      <a href="/about" class="toolbar-pill">Guide</a>
+    </div>
+    <div class="agent-status" id="connection-status" data-state="connecting">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span class="status-label">Connecting…</span>
+    </div>
+  </div>
+
+  <details class="help-drawer" id="agent-help" data-onboarding-step="agent-intro">
+    <summary>What happens next?</summary>
+    <div class="help-body">
+      <ol>
+        <li><strong>Paste facts</strong> — name, price, category, features in plain English.</li>
+        <li><strong>Review draft</strong> — the gate shows facts, description, and any guardrail flags.</li>
+        <li><strong>Approve or correct</strong> — reject with feedback to teach the agent; edits are remembered.</li>
+        <li><strong>See it live</strong> — approved products appear in the storefront preview instantly.</li>
+      </ol>
+    </div>
+  </details>
+
+  <ol class="pipeline-steps" aria-label="Pipeline progress">
+    <li class="step" data-step="parse"><span class="step-num">1</span> Parse</li>
+    <li class="step" data-step="draft"><span class="step-num">2</span> Draft</li>
+    <li class="step" data-step="gate"><span class="step-num">3</span> Gate</li>
+    <li class="step" data-step="publish"><span class="step-num">4</span> Publish</li>
+  </ol>
+
+  <div class="agent-layout">
+    <section class="pane chat-pane" aria-labelledby="chat-heading" data-onboarding-step="agent-chat">
+      <div class="pane-head">
+        <div class="pane-title-row">
+          <span class="pane-badge">1</span>
+          <h2 id="chat-heading">Input</h2>
+        </div>
+        <p class="pane-help">Paste product facts in plain English. Optionally attach a product photo — it appears on the storefront after publish.</p>
+      </div>
+      <div id="chat-log" class="chat-log" aria-live="polite">
+        <div class="chat-welcome" id="chat-welcome">
+          <strong>Ready when you are</strong>
+          <p>Paste raw product facts below, or try one of the examples.</p>
+          <div class="sample-prompts" id="sample-prompts">
+            <button type="button" class="sample-chip" data-prompt="Aurora Wireless Earbuds, Rs 2499, electronics, 8-hour battery, ANC, IPX5">Wireless earbuds</button>
+            <button type="button" class="sample-chip" data-prompt="Cedar Pour-Over Kettle, Rs 1899, kitchen, gooseneck spout, 1L capacity, stainless steel">Pour-over kettle</button>
+            <button type="button" class="sample-chip" data-prompt="Riverstone Face Serum, Rs 1299, beauty, vitamin C, hyaluronic acid, 30ml">Face serum</button>
+          </div>
+        </div>
+      </div>
+      <form id="chat-form" class="chat-form">
+        <textarea
+          id="chat-input"
+          rows="4"
+          placeholder="Name, price, category, features — anything you have"
+          aria-label="Product facts"
+        ></textarea>
+        <div class="photo-upload-row">
+          <label class="photo-upload-label" for="product-photo">Product photo (optional)</label>
+          <input id="product-photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" />
+          <img id="photo-preview" class="photo-preview" alt="" hidden />
+        </div>
+        <div class="chat-form-actions">
+          <button type="submit" id="send-btn" class="btn-primary" disabled>Send to agent</button>
+          <span class="form-hint"><kbd>Enter</kbd> send · <kbd>Shift+Enter</kbd> new line</span>
+        </div>
+      </form>
+    </section>
+
+    <section class="pane gate-pane" aria-labelledby="gate-heading" data-onboarding-step="agent-gate">
+      <div class="pane-head">
+        <div class="pane-title-row">
+          <span class="pane-badge">2</span>
+          <h2 id="gate-heading">Approval gate</h2>
+        </div>
+        <p class="pane-help">Nothing publishes without your sign-off. <strong>Approve</strong> to publish · <strong>Reject</strong> to redraft with feedback · <strong>Edit</strong> to save your version.</p>
+      </div>
+      <div id="gate-panel" class="gate-panel">
+        <div class="empty-state-card">
+          <div class="empty-icon-wrap" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M11 16l4 4 7-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <strong>Awaiting draft</strong>
+          <p>Your gate preview will appear here after the agent finishes drafting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pane side-pane" aria-labelledby="storefront-heading" data-onboarding-step="agent-shop">
+      <div class="pane-head side-head">
+        <div class="pane-title-row">
+          <span class="pane-badge muted">Live</span>
+          <h2 id="storefront-heading">Storefront</h2>
+        </div>
+        <a class="btn-secondary btn-sm" href="/" target="_blank" rel="noopener">Open ↗</a>
+      </div>
+      <iframe src="/" title="Live storefront preview" class="storefront-frame"></iframe>
+    </section>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="/static/agent.js?v=20260713b"></script>
+<script src="/static/onboarding.js"></script>
+{% endblock %}

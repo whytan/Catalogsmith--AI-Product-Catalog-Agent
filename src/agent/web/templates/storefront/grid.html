@@ -1,0 +1,87 @@
+{% extends "shop/base.html" %}
+{% from "storefront/_product_image.html" import product_image %}
+
+{% block title %}{{ store_name }} — Shop{% endblock %}
+
+{% block content %}
+<div class="shop-page">
+  <section class="shop-hero">
+    <div class="shop-hero-content">
+      <p class="eyebrow">Curated catalog</p>
+      <h2>Thoughtfully described products, ready to browse.</h2>
+      <p class="lead">
+        Every listing was drafted by the catalog agent and approved through the human gate.
+        <a href="/about">See how it works</a>.
+      </p>
+    </div>
+    <div class="shop-hero-stats">
+      <div class="stat-card">
+        <strong>{{ total }}</strong>
+        <span>Products live</span>
+      </div>
+      <div class="stat-card">
+        <strong>{{ categories | length }}</strong>
+        <span>Categories</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="shop-toolbar-sticky">
+    <section class="shop-toolbar">
+      <form class="search-form" method="get" action="/">
+        <input
+          type="search"
+          name="q"
+          value="{{ query }}"
+          placeholder="Search by name or description…"
+          aria-label="Search products"
+        />
+        <button type="submit">Search</button>
+      </form>
+      <div class="category-filters">
+        <a href="/" class="chip {% if not active_category %}active{% endif %}">All</a>
+        {% for cat in categories %}
+        <a href="/?category={{ cat }}" class="chip {% if active_category == cat %}active{% endif %}">
+          {{ category_labels.get(cat, cat) }}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+
+  <div class="result-meta">
+    <span>
+      {% if query %}Results for "{{ query }}"{% elif active_category %}{{ category_labels.get(active_category, active_category) }}{% else %}All products{% endif %}
+    </span>
+    <span>{{ total }} item{{ '' if total == 1 else 's' }}</span>
+  </div>
+
+  {% if products %}
+  <div id="product-grid" class="product-grid">
+    {% for product in products %}
+    <article class="product-card">
+      <a href="/products/{{ product.id }}" class="product-image-link" aria-hidden="true" tabindex="-1">
+        {{ product_image(product) }}
+      </a>
+      <div class="product-body">
+        <div class="product-category">{{ category_labels.get(product.category, product.category) }}</div>
+        <h3 class="product-name">
+          <a href="/products/{{ product.id }}">{{ product.name }}</a>
+        </h3>
+        <p class="product-description">{{ product.description }}</p>
+        <div class="product-footer">
+          <span class="product-price">{{ product.price | inr }}</span>
+          <a href="/products/{{ product.id }}" class="product-cta">View details →</a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <strong>No products found</strong>
+    Try a different search or category, or publish a new listing from the agent console.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

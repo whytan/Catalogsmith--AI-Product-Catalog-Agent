@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{% block meta_description %}Catalogsmith — AI catalog agent with human approval gate and live storefront.{% endblock %}" />
+  <title>{% block title %}{{ store_name }}{% endblock %}</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="/static/components.css" />
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{% block brand_href %}/{% endblock %}" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 5h14v2H3V5zm0 4.5h10v2H3v-2zm0 4.5h12v2H3v-2z" fill="currentColor"/>
+            <circle cx="15.5" cy="14.5" r="2" fill="#c45d26"/>
+          </svg>
+        </span>
+        <div>
+          <h1>{{ store_name }}</h1>
+          <p class="tagline">{% block tagline %}AI catalog · human approval · live storefront{% endblock %}</p>
+        </div>
+      </a>
+      <nav class="header-nav" aria-label="Page">
+        {% block header_nav %}{% endblock %}
+      </nav>
+    </div>
+  </header>
+
+  {% block surface_bar %}{% endblock %}
+
+  <main class="{% block container_class %}container{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    {% block site_footer %}
+    <div class="footer-inner footer-organized">
+      <div class="footer-brand">
+        <strong>{{ store_name }}</strong>
+        <p>{% block footer_tagline %}Turn raw product facts into published listings with a human-in-the-loop approval gate.{% endblock %}</p>
+      </div>
+      <div class="footer-links footer-links-grid">
+        {% block footer_links %}
+        <div>
+          <h4>Learn</h4>
+          <a href="/about">How it works</a>
+          <a href="/health">System health</a>
+        </div>
+        <div>
+          <h4>Store</h4>
+          <a href="/">Browse products</a>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+    <p class="footer-meta">Self-hosted · SQLite · built for 1–2 operators</p>
+    {% endblock %}
+  </footer>
+
+  <script src="/static/ui.js" defer></script>
+  {% block body_scripts %}{% endblock %}
+</body>
+</html>

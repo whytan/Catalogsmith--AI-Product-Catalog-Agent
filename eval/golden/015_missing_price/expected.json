@@ -1,0 +1,4 @@
+{
+  "should_fail_validation": true,
+  "missing_fields": ["price"]
+}

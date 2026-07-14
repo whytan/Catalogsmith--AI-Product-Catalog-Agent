@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body_class %}surface-seller page-workspace{% endblock %}
+{% block tagline %}Seller workspace{% endblock %}
+{% block brand_href %}/app{% endblock %}
+
+{% block header_nav %}
+<a href="/app" class="{% if request.url.path.startswith('/app') %}nav-active{% endif %}">Agent</a>
+<a href="/dashboard" class="{% if request.url.path.startswith('/dashboard') %}nav-active{% endif %}">Dashboard</a>
+<a href="/about" class="nav-muted">Guide</a>
+{% endblock %}
+
+{% block surface_bar %}
+<div class="surface-bar">
+  <div class="surface-bar-inner">
+    {% set surface = 'seller' %}
+    {% include "_partials/surface_switcher.html" %}
+    <span class="surface-context">Loop 1 · paste facts → gate → publish</span>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer_links %}
+<div>
+  <h4>Seller</h4>
+  <a href="/app">Agent console</a>
+  <a href="/dashboard">Operations</a>
+</div>
+<div>
+  <h4>Insights</h4>
+  <a href="/insights">Customer signals</a>
+  <a href="/insights/mining">Signal mining</a>
+</div>
+<div>
+  <h4>Store</h4>
+  <a href="/">View storefront</a>
+  <a href="/about">How it works</a>
+</div>
+{% endblock %}

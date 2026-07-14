@@ -1,0 +1,94 @@
+{% extends "dashboard/layout.html" %}
+{% from "_partials/page_header.html" import page_header %}
+{% set active = 'home' %}
+
+{% block title %}Dashboard — {{ store_name }}{% endblock %}
+
+{% block workspace_header %}
+{{ page_header(
+  'Loop 1 · Seller',
+  'Operations overview',
+  'Track whether the agent is learning your taste and whether guardrails are catching issues before the gate.'
+) }}
+{% endblock %}
+
+{% block workspace_content %}
+<div class="metric-cards">
+  <div class="metric-card metric-highlight">
+    <span class="metric-label">Products published</span>
+    <strong>{{ learning.summary.products }}</strong>
+    {% if learning.summary.first_edit_rate is not none and learning.summary.latest_edit_rate is not none %}
+    <span class="metric-trend {% if learning.summary.latest_edit_rate < learning.summary.first_edit_rate %}down{% else %}flat{% endif %}">
+      Edit rate: {{ learning.summary.first_edit_rate }} → {{ learning.summary.latest_edit_rate }}
+    </span>
+    {% endif %}
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Avg edit rate</span>
+    <strong>{{ learning.summary.avg_edit_rate }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Grounding violations</span>
+    <strong>{{ guardrails.summary.grounding_violations }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Persona signals</span>
+    <strong>{{ personas.summary.total_signals }}</strong>
+    <span class="metric-trend flat">SYNTHETIC · see Insights</span>
+  </div>
+</div>
+
+<div class="dashboard-cards">
+  <a class="dashboard-card" href="/dashboard/learning">
+    <span class="dashboard-card-icon" aria-hidden="true">↘</span>
+    <h3>Learning</h3>
+    <p>Edit rate should fall as the agent learns your taste from gate corrections.</p>
+    <div class="card-metric"><strong>{{ learning.summary.products }}</strong> products tracked</div>
+    <span class="card-arrow">Open learning →</span>
+  </a>
+  <a class="dashboard-card" href="/dashboard/guardrails">
+    <span class="dashboard-card-icon" aria-hidden="true">⛨</span>
+    <h3>Guardrails</h3>
+    <p>Input sanitization and grounding checks before listings reach the gate.</p>
+    <div class="card-metric"><strong>{{ guardrails.summary.violation_rate }}</strong> violation rate</div>
+    <span class="card-arrow">Open guardrails →</span>
+  </a>
+  <a class="dashboard-card" href="/insights">
+    <span class="dashboard-card-icon" aria-hidden="true">◎</span>
+    <h3>Customer insights</h3>
+    <p>Loop 2 — SYNTHETIC persona signals, mining, and rewrite proposals.</p>
+    <div class="card-metric"><strong>{{ personas.summary.questions }}</strong> questions logged</div>
+    <span class="card-arrow">Open insights →</span>
+  </a>
+</div>
+
+<section class="feature-map panel">
+  <h3 class="section-title">What's in Catalogsmith</h3>
+  <div class="feature-map-grid">
+    <div class="feature-map-group">
+      <h4>Loop 1 · Seller</h4>
+      <ul>
+        <li><a href="/app">Agent console</a> — paste facts, draft, gate, publish</li>
+        <li><a href="/dashboard/learning">Learning graph</a> — edit rate proves memory works</li>
+        <li><a href="/dashboard/guardrails">Guardrails</a> — sanitizer + grounding checks</li>
+      </ul>
+    </div>
+    <div class="feature-map-group">
+      <h4>Loop 2 · Insights <span class="synthetic-tag">SYNTHETIC</span></h4>
+      <ul>
+        <li><a href="/insights/personas">Persona panel</a> — four simulated shoppers</li>
+        <li><a href="/insights/mining">Signal mining</a> — cluster questions, propose rewrites</li>
+        <li>Rewrites route through the <a href="/app">same approval gate</a></li>
+      </ul>
+    </div>
+    <div class="feature-map-group">
+      <h4>Store &amp; infrastructure</h4>
+      <ul>
+        <li><a href="/">Live storefront</a> — gate-approved listings</li>
+        <li><a href="/about">How it works</a> — full product tour</li>
+        <li><a href="/health">Health</a> — system status &amp; MCP tools</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock %}

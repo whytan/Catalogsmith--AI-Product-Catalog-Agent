@@ -1,0 +1,77 @@
+{% extends "insights/layout.html" %}
+{% from "_partials/page_header.html" import page_header %}
+{% set active = 'home' %}
+
+{% block title %}Customer Insights — {{ store_name }}{% endblock %}
+
+{% block workspace_header %}
+{{ page_header(
+  'Loop 2',
+  'Customer insights',
+  'Four personas browse your published listings and surface questions you\'d never see from sales data alone.',
+  '<div class="synthetic-banner">SYNTHETIC — simulated customer data only. Not real shopper analytics.</div>'
+) }}
+{% endblock %}
+
+{% block workspace_content %}
+<div class="metric-cards">
+  <div class="metric-card metric-highlight">
+    <span class="metric-label">Total signals</span>
+    <strong>{{ personas.summary.total_signals }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Questions</span>
+    <strong>{{ personas.summary.questions }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Clusters</span>
+    <strong>{{ personas.summary.clusters }}</strong>
+  </div>
+</div>
+
+<div class="persona-explainer">
+  <h3 class="section-title">The four personas</h3>
+  <div class="persona-grid">
+    <div class="persona-card bargain">
+      <strong>Bargain hunter</strong>
+      <p>Focuses on price and value. Asks about cost, deals, and comparisons.</p>
+    </div>
+    <div class="persona-card spec">
+      <strong>Spec reader</strong>
+      <p>Wants technical detail. Asks about materials, dimensions, and specs.</p>
+    </div>
+    <div class="persona-card gifter">
+      <strong>Skeptical gifter</strong>
+      <p>Buying for someone else. Needs trust signals and gift-worthiness.</p>
+    </div>
+    <div class="persona-card skimmer">
+      <strong>Skimmer</strong>
+      <p>Short attention span. Bounces fast if the listing isn't scannable.</p>
+    </div>
+  </div>
+</div>
+
+<div class="loop2-actions">
+  <p class="loop2-actions-copy">
+    Run the full Loop 2 demo in one step: synthetic personas browse your shop, questions are clustered,
+    and the rewrite opens in the seller approval gate.
+  </p>
+  <button type="button" class="btn-loop2" id="loop2-run-btn" data-loop2-action data-limit="15">
+    Run Loop 2 → open gate
+  </button>
+  <p class="loop2-status" id="loop2-run-status" hidden></p>
+</div>
+
+<div class="insights-cards">
+  <a class="insights-card" href="/insights/personas">
+    <h3>Persona signals</h3>
+    <p>Views, questions, reviews, and cart clicks from the synthetic panel.</p>
+    <span class="card-arrow">View signals →</span>
+  </a>
+  <a class="insights-card" href="/insights/mining">
+    <h3>Signal mining</h3>
+    <p>Cluster questions by theme and route rewrite proposals through the seller gate.</p>
+    <span class="card-arrow">View mining →</span>
+  </a>
+</div>
+{% endblock %}

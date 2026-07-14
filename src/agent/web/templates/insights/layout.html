@@ -1,0 +1,41 @@
+{% extends "insights/base.html" %}
+
+{% block container_class %}container container-dashboard{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/dashboard.css" />
+<link rel="stylesheet" href="/static/insights.css" />
+<link rel="stylesheet" href="/static/onboarding.css" />
+{% endblock %}
+
+{% block body_attrs %}data-onboarding="insights"{% endblock %}
+
+{% block content %}
+<div class="workspace-layout" data-workspace>
+  <button type="button" class="workspace-toggle" aria-expanded="false" aria-controls="workspace-sidebar">
+    <span class="workspace-toggle-label">☰ Insights menu</span>
+  </button>
+
+  <aside class="workspace-sidebar" id="workspace-sidebar" aria-label="Insights navigation">
+    <div class="sidebar-brand">
+      <span class="sidebar-label">Loop 2 · SYNTHETIC</span>
+      <strong>Customer insights</strong>
+    </div>
+    {% include "insights/_nav.html" %}
+    <div class="sidebar-footer">
+      <a href="/app" class="sidebar-cta">Approve at gate</a>
+      <a href="/dashboard" class="sidebar-link">Seller operations →</a>
+    </div>
+  </aside>
+
+  <div class="workspace-main">
+    {% block workspace_header %}{% endblock %}
+    <div class="workspace-content">
+      {% block workspace_content %}{% endblock %}
+    </div>
+  </div>
+</div>
+<script src="/static/onboarding.js"></script>
+<script src="/static/insights.js"></script>
+{% endblock %}

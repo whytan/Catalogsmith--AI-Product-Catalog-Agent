@@ -1,0 +1,73 @@
+{% extends "insights/layout.html" %}
+{% from "_partials/page_header.html" import page_header %}
+{% set active = 'mining' %}
+
+{% block title %}Signal Mining — {{ store_name }}{% endblock %}
+
+{% block workspace_header %}
+{{ page_header(
+  'Loop 2 · Rewrite',
+  'Signal mining',
+  'Clusters persona questions per product, proposes rewrites, and routes through the same human approval gate.',
+  '<div class="synthetic-banner">SYNTHETIC Loop 2 — customer signal mining and rewrite proposals.</div>'
+) }}
+{% endblock %}
+
+{% block workspace_content %}
+<div class="loop2-actions">
+  <p class="loop2-actions-copy">
+    Mine clusters from persona signals, then open a rewrite proposal in the seller gate — one click.
+  </p>
+  <button type="button" class="btn-loop2" id="loop2-run-btn" data-loop2-action data-limit="15">
+    Run Loop 2 → open gate
+  </button>
+  <p class="loop2-status" id="loop2-run-status" hidden></p>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <h3>Loop conflicts</h3>
+    <span class="insights-copy" style="font-size: 0.82rem">Seller style vs shopper preferences</span>
+  </div>
+  <ul class="conflict-list">
+    {% for conflict in conflicts %}
+    <li>{{ conflict.message }}</li>
+    {% else %}
+    <li>No conflicts detected — run the persona panel first to generate signals.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="panel">
+  <div class="panel-header"><h3>Top clusters</h3></div>
+  <div class="table-wrap">
+    <table class="learning-table">
+      <thead><tr><th>Product</th><th>Theme</th><th>Count</th><th>Sample questions</th><th></th></tr></thead>
+      <tbody>
+        {% for cluster in data.personas.clusters %}
+        <tr>
+          <td><a href="/products/{{ cluster.product_id }}">#{{ cluster.product_id }}</a></td>
+          <td><span class="signal-kind">{{ cluster.theme }}</span></td>
+          <td>{{ cluster.count }}</td>
+          <td>{{ cluster.sample_questions | join(' · ') }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn-loop2-ghost"
+              data-loop2-action
+              data-loop2-rewrite
+              data-product-id="{{ cluster.product_id }}"
+              data-theme="{{ cluster.theme }}"
+            >
+              Open gate
+            </button>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No clusters yet — click <strong>Run Loop 2</strong> above.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{
+  "category": "beauty",
+  "price": "899.00",
+  "must_not_contain": [
+    "ignore previous",
+    "nike"
+  ]
+}

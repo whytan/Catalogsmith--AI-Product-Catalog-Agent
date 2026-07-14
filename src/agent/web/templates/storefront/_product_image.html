@@ -1,0 +1,18 @@
+{% macro product_image(product, detail=false) %}
+  {% set image_url = product | product_image %}
+  <div class="{% if detail %}product-detail-image{% else %}product-image{% endif %} {{ category_themes.get(product.category, '') }}">
+    {% if image_url %}
+    <img
+      src="{{ image_url }}"
+      alt="{{ product.name }}"
+      class="product-photo{% if detail %} product-photo-large{% endif %}"
+      loading="lazy"
+      decoding="async"
+    />
+    {% else %}
+    <span class="product-image-icon{% if detail %} large{% endif %}" aria-hidden="true">
+      {{ category_labels.get(product.category, product.category)[0] }}
+    </span>
+    {% endif %}
+  </div>
+{% endmacro %}

@@ -1,0 +1,105 @@
+{% extends "insights/layout.html" %}
+{% from "_partials/page_header.html" import page_header %}
+{% set active = 'personas' %}
+
+{% block title %}Personas — {{ store_name }}{% endblock %}
+
+{% block workspace_header %}
+{{ page_header(
+  'Loop 2 · Customers',
+  'Persona panel',
+  'Four personas browse published listings and emit views, questions, reviews, and cart signals.',
+  '<div class="synthetic-banner">SYNTHETIC — simulated customer personas. Never used for resume metrics.</div>'
+) }}
+{% endblock %}
+
+{% block workspace_content %}
+<div class="loop2-actions">
+  <p class="loop2-actions-copy">
+    Re-run personas on your published listings, mine the top question cluster, and open the rewrite at the seller gate.
+  </p>
+  <button type="button" class="btn-loop2" id="loop2-run-btn" data-loop2-action data-limit="15">
+    Run Loop 2 → open gate
+  </button>
+  <p class="loop2-status" id="loop2-run-status" hidden></p>
+</div>
+
+<div class="persona-legend" aria-label="Persona types">
+  <span class="persona-chip bargain">Bargain hunter</span>
+  <span class="persona-chip spec">Spec reader</span>
+  <span class="persona-chip gifter">Skeptical gifter</span>
+  <span class="persona-chip skimmer">Skimmer</span>
+</div>
+
+<div class="metric-cards">
+  <div class="metric-card metric-highlight">
+    <span class="metric-label">Total signals</span>
+    <strong>{{ data.summary.total_signals }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Questions</span>
+    <strong>{{ data.summary.questions }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Reviews</span>
+    <strong>{{ data.summary.reviews }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Clusters</span>
+    <strong>{{ data.summary.clusters }}</strong>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header"><h3>Top clusters</h3></div>
+  <div class="table-wrap">
+    <table class="learning-table">
+      <thead><tr><th>Product</th><th>Theme</th><th>Count</th><th>Summary</th><th></th></tr></thead>
+      <tbody>
+        {% for cluster in data.clusters %}
+        <tr>
+          <td><a href="/products/{{ cluster.product_id }}">#{{ cluster.product_id }}</a></td>
+          <td><span class="signal-kind">{{ cluster.theme }}</span></td>
+          <td>{{ cluster.count }}</td>
+          <td>{{ cluster.summary }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn-loop2-ghost"
+              data-loop2-action
+              data-loop2-rewrite
+              data-product-id="{{ cluster.product_id }}"
+              data-theme="{{ cluster.theme }}"
+            >
+              Open gate
+            </button>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No signals yet — click <strong>Run Loop 2</strong> above.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header"><h3>Recent signals</h3></div>
+  <div class="table-wrap">
+    <table class="learning-table">
+      <thead><tr><th>Product</th><th>Persona</th><th>Kind</th><th>Text</th><th>When</th></tr></thead>
+      <tbody>
+        {% for row in data.recent %}
+        <tr>
+          <td><a href="/products/{{ row.product_id }}">#{{ row.product_id }}</a></td>
+          <td>{{ row.persona }}</td>
+          <td><span class="signal-kind {{ row.kind }}">{{ row.kind }}</span></td>
+          <td>{{ row.text }}</td>
+          <td>{{ row.created_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

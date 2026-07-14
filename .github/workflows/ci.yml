@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run test suite
+        env:
+          LLM_MOCK: "1"
+          CHROMA_EPHEMERAL: "1"
+          DATABASE_URL: "sqlite+aiosqlite:///:memory:"
+        run: pytest -q
+
+  planted-regression-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Prove weakened sanitizer fails injection traps
+        env:
+          LLM_MOCK: "1"
+          CHROMA_EPHEMERAL: "1"
+          DATABASE_URL: "sqlite+aiosqlite:///:memory:"
+          SANITIZER_WEAK: "1"
+        run: |
+          pytest tests/test_injection_traps.py::test_injection_trap_sanitized_or_rejected -q && exit 1 || exit 0

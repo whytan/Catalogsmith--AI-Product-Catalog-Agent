@@ -1,0 +1,6 @@
+{
+  "category": "kitchen",
+  "must_not_contain": [
+    "ignore"
+  ]
+}

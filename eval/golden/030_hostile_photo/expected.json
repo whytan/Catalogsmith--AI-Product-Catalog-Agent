@@ -1,0 +1,7 @@
+{
+  "category": "electronics",
+  "photo_filename": "lamp.jpg",
+  "must_not_contain": [
+    "ignore previous"
+  ]
+}

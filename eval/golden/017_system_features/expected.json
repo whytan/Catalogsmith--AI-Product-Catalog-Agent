@@ -1,0 +1,7 @@
+{
+  "category": "electronics",
+  "must_not_contain": [
+    "system:",
+    "spam bot"
+  ]
+}

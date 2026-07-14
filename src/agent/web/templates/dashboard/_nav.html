@@ -1,0 +1,22 @@
+<nav class="workspace-nav dashboard-nav" aria-label="Dashboard sections">
+  <a href="/dashboard" class="nav-item {% if active == 'home' %}active{% endif %}">
+    <span class="nav-icon" aria-hidden="true">◈</span>
+    <span>Overview</span>
+  </a>
+  <a href="/dashboard/learning" class="nav-item {% if active == 'learning' %}active{% endif %}">
+    <span class="nav-icon" aria-hidden="true">↘</span>
+    <span>Learning</span>
+  </a>
+  <a href="/dashboard/guardrails" class="nav-item {% if active == 'guardrails' %}active{% endif %}">
+    <span class="nav-icon" aria-hidden="true">⛨</span>
+    <span>Guardrails</span>
+  </a>
+  <a href="/insights" class="nav-item nav-external">
+    <span class="nav-icon" aria-hidden="true">◎</span>
+    <span>Insights (Loop 2)</span>
+  </a>
+  <a href="/about" class="nav-item nav-external">
+    <span class="nav-icon" aria-hidden="true">?</span>
+    <span>How it works</span>
+  </a>
+</nav>

@@ -1,0 +1,72 @@
+{% extends "dashboard/layout.html" %}
+{% from "_partials/page_header.html" import page_header %}
+{% set active = 'guardrails' %}
+
+{% block title %}Guardrails — {{ store_name }}{% endblock %}
+
+{% block workspace_header %}
+{{ page_header(
+  'Safety',
+  'Guardrails',
+  'Input sanitization strips and unsupported claims flagged before listings reach the human approval gate.'
+) }}
+{% endblock %}
+
+{% block workspace_content %}
+<div class="metric-cards">
+  <div class="metric-card">
+    <span class="metric-label">Sanitizer runs</span>
+    <strong>{{ data.summary.sanitize_runs }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Content strips</span>
+    <strong>{{ data.summary.content_strips }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Drafts checked</span>
+    <strong>{{ data.summary.drafts_checked }}</strong>
+  </div>
+  <div class="metric-card metric-highlight">
+    <span class="metric-label">Grounding violations</span>
+    <strong>{{ data.summary.grounding_violations }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Violation rate</span>
+    <strong>{{ data.summary.violation_rate }}</strong>
+  </div>
+  <div class="metric-card">
+    <span class="metric-label">Trap pass-through</span>
+    <strong>{{ data.summary.trap_pass_through_rate }}%</strong>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <h3>Recent events</h3>
+  </div>
+  <div class="table-wrap">
+    <table class="learning-table">
+      <thead>
+        <tr>
+          <th>Node</th>
+          <th>Metric</th>
+          <th>Detail</th>
+          <th>When</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data.recent %}
+        <tr>
+          <td>{{ row.node }}</td>
+          <td>{{ row.metric }}</td>
+          <td>{{ row.detail }}</td>
+          <td>{{ row.created_at }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No guardrail events yet. Run the agent to populate this panel.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

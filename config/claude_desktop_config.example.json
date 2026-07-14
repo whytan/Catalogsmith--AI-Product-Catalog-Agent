@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "catalogsmith-storefront": {
+      "command": "catalogsmith-mcp",
+      "args": [],
+      "env": {
+        "DATABASE_URL": "sqlite+aiosqlite:///./data/catalog.db"
+      }
+    }
+  }
+}
